@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  # Название сервиса
+  mongo:
+    # Образ с hub.docker.com
+    image: mongo
+    container_name: js-auth-mongodb
+    # Проброс секретных переменных окружения
+    env_file: ./.env
+    # Проброс файлов родитель:контейнер. MongoDB будет создавать свои файлы
+    volumes:
+      - ./mongo:/data/db
+    # Проброс порта родитель:контейнер
+    ports:
+      - "27017:27017"
