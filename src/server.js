@@ -1,11 +1,11 @@
-import "dotenv/config.js";
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-// import passport from "passport";
-
-// import { router } from "./routes/index.js";
-// import { passportMiddelWare } from "./middlewares/passport.js";
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv").config();
+const routes = require("./routes");
+const { requestLogger, errorLogger } = require("./middlewares/logger.js");
+const errorHandler = require("./middlewares/error-handler.js");
+const limiter = require("./middlewares/limiter.js");
 
 const {
   PORT = 4002,
@@ -34,11 +34,11 @@ app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`Listening port ${PORT}`);
 });
 
+app.use(limiter);
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
-
-// app.use(passport.initialize());
-// passportMiddelWare(passport);
-//
-// app.use(router);
+app.use(requestLogger);
+app.use(routes);
+app.use(errorLogger);
+app.use(errorHandler);

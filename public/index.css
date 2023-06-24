@@ -1,4 +1,18 @@
-.container {}
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: grey;
+}
+
+.flex {
+  display: flex;
+  height: 100%;
+
+}
+
+.container {
+  margin: auto;
+}
 
 .wrapper {
   display: flex;
@@ -6,7 +20,7 @@
   align-items: center;
   width: 300px;
   height: 200px;
-  background-color: wheat;
+  background-color: #aaa;
   padding: 16px;
   border-radius: 16px;
 }
