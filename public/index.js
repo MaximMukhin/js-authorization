@@ -1,7 +1,16 @@
-const buttonElement = document.querySelector("#button");
-const loginElement = document.querySelector("#login");
-const passwordElement = document.querySelector("#password");
+const buttonElement = document.querySelector("#button-l");
+const loginElement = document.querySelector("#login-l");
+const passwordElement = document.querySelector("#password-l");
 
-buttonElement.addEventListener("click", () =>
-  console.log(loginElement.value, passwordElement.value)
-);
+const buttonRElement = document.querySelector("#button-registration");
+const loginERlement = document.querySelector("#login-registration");
+const passwordRElement = document.querySelector("#password-registration");
+
+buttonElement.addEventListener("click", () => {
+  console.log(loginElement.value, passwordElement.value);
+});
+
+buttonRElement.addEventListener("click", () => {
+  console.log(loginERlement.value, passwordRElement.value);
+  
+});

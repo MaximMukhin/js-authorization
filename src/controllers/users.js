@@ -1,15 +1,17 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { BadRequestError, ConflictError } = require('../errors');
-const User = require('../models/user.js');
-const envHandler = require('../utils/env-hendler.js');
-const getMessage = require('../utils/messages.js');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { BadRequestError, ConflictError } = require("../errors");
+const User = require("../models/user.js");
+const envHandler = require("../utils/env-hendler.js");
+const getMessage = require("../utils/messages.js");
 
 const { TOKEN_SECRET_KEY } = envHandler();
 
 module.exports.createUser = async (req, res, next) => {
+  
   try {
     const { email, password, name } = req.body;
+
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({
       name,
@@ -17,14 +19,14 @@ module.exports.createUser = async (req, res, next) => {
       password: hash,
     });
     const userWithoutPassword = user;
-    userWithoutPassword.password = '';
+    userWithoutPassword.password = "";
     return res.send({ user: userWithoutPassword });
   } catch (error) {
-    if (error.name === 'ValidationError') {
+    if (error.name === "ValidationError") {
       return next(new BadRequestError());
     }
-    if (error.name === 'MongoError' && error.code === 11000) {
-      return next(new ConflictError(getMessage('ALREADY_REGISTERED')));
+    if (error.name === "MongoError" && error.code === 11000) {
+      return next(new ConflictError(getMessage("ALREADY_REGISTERED")));
     }
     return next(error);
   }
@@ -34,11 +36,9 @@ module.exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findUserByCredentials(email, password);
-    const token = jwt.sign(
-      { _id: user._id },
-      TOKEN_SECRET_KEY,
-      { expiresIn: '7d' },
-    );
+    const token = jwt.sign({ _id: user._id }, TOKEN_SECRET_KEY, {
+      expiresIn: "7d",
+    });
     return res.send({ token });
   } catch (error) {
     return next(error);
