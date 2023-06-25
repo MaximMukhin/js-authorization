@@ -37,6 +37,7 @@ app.listen(PORT, (err) => {
 app.use(limiter);
 app.use(cors());
 app.use(express.static("public"));
+//app.use('/static', express.static(__dirname + 'public'));
 app.use(express.json());
 app.use(requestLogger);
 app.use(routes);

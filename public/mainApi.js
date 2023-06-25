@@ -2,11 +2,14 @@ import Api from "./Api.js";
 
 const mainApi = new Api("http://localhost:4002");
 
-export const signUp = ({ email, password, name }) =>
+export const signUp = ({ email, password, name }) => {
+  console.log('signUp')
+
   mainApi.post({
     handle: "/signup",
-    body: { email, password, name },
-  });
+    body: {email, password, name},
+  })
+};
 
 export const signIn = ({ email, password }) =>
   mainApi.post({
@@ -17,41 +20,5 @@ export const signIn = ({ email, password }) =>
 export const getMe = ({ token }) =>
   mainApi.get({
     handle: "/users/me",
-    token,
-  });
-
-export const createActicle = ({
-  token,
-  keyword,
-  title,
-  text,
-  date,
-  source,
-  link,
-  image,
-}) =>
-  mainApi.post({
-    handle: "/articles",
-    token,
-    body: {
-      keyword,
-      title,
-      text,
-      date,
-      source,
-      link,
-      image,
-    },
-  });
-
-export const getSavedArticles = ({ token }) =>
-  mainApi.get({
-    handle: "/articles",
-    token,
-  });
-
-export const deteleSavedArticle = ({ id, token }) =>
-  mainApi.delete({
-    handle: `/articles/${id}`,
     token,
   });
