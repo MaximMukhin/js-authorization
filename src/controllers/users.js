@@ -4,11 +4,11 @@ const { BadRequestError, ConflictError } = require("../errors");
 const User = require("../models/user.js");
 const envHandler = require("../utils/env-hendler.js");
 const getMessage = require("../utils/messages.js");
+const NotFoundError = require("../errors/not-found-error");
 
 const { TOKEN_SECRET_KEY } = envHandler();
 
 module.exports.createUser = async (req, res, next) => {
-  
   try {
     const { email, password, name } = req.body;
 

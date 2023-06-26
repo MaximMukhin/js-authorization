@@ -1,4 +1,4 @@
-import {signUp} from './mainApi.js'
+import { signUp, signIn, getMe } from "./mainApi.js";
 
 const buttonElement = document.querySelector("#button-l");
 const emailElement = document.querySelector("#email-l");
@@ -22,9 +22,16 @@ buttonRElement.addEventListener("click", () => {
     password: passwordRElement.value,
     name: nameRElement.value,
   };
-  signUp(body)
+  signUp(body);
 });
 
 buttonElement.addEventListener("click", () => {
   console.log("login", emailElement.value, passwordElement.value);
+
+  const body = {
+    email: emailERlement.value,
+    password: passwordRElement.value,
+  };
+
+  signIn(body).then;
 });
