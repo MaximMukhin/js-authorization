@@ -46,6 +46,7 @@ module.exports.login = async (req, res, next) => {
 };
 
 module.exports.getUserByToken = async (req, res, next) => {
+  console.log(req.user);
   try {
     const { _id: userId } = req.user;
     const user = await User.findById(userId);

@@ -6,6 +6,7 @@ const { TOKEN_SECRET_KEY } = envHandler();
 
 module.exports = (req, res, next) => {
   const { authorization = "" } = req.headers;
+  console.log("authorization", authorization);
 
   if (!authorization && !authorization.startsWith("Bearer ")) {
     return next(new UnauthorizedError());
@@ -21,6 +22,7 @@ module.exports = (req, res, next) => {
   }
 
   req.user = payload;
+  console.log(payload);
 
   return next();
 };

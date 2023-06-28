@@ -33,5 +33,10 @@ buttonElement.addEventListener("click", () => {
     password: passwordRElement.value,
   };
 
-  signIn(body).then;
+  signIn(body).then((res) => {
+    console.log(res.token);
+    localStorage.setItem("token", res.token);
+    const token = { token: res.token };
+    getMe(token).then((res) => console.log(res));
+  });
 });
